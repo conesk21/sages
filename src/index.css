@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
 :root{
      --green: #395B50;
      --cream: #D5C7BC;
@@ -7,6 +8,15 @@
 
 body{
     background-color: var(--white);
+    margin: 0;
+    color: var(--cream);
+    font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header{
+    background-color: var(--green);
+    margin: 0;
+    padding: 40px
 }
 
 .card-holder{
@@ -14,6 +24,7 @@ body{
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 10px;
 }
 
 .item-card{
