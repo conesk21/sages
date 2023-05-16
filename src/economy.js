@@ -8,7 +8,7 @@ class Holder extends Component {
     return (
       <div className="card-holder">
       {array.map((itemName, i) =>{
-        return <Card key={i}name={itemName} value={smallTown.getItemValue(itemName)} price={smallTown.getPrice(itemName)}/>
+        return <Card key={i} item={smallTown.getItem(itemName)}/>
       })}
       </div>)
   }

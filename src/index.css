@@ -35,3 +35,13 @@ header{
     min-width: 300px;
     width:fit-content;
 }
+
+button{
+    border: none;
+    background-color: var(--white);
+    color: var(--black);
+    border-radius: 10px;
+}
+button:hover{
+    color: var(--green)
+}

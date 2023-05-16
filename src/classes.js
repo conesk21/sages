@@ -21,8 +21,9 @@ const currencyFacory = (coinArray) => {
             result.push([coinCounter, coinArray[i].getName()])
             }
         }
-        return result
+        return result.map((value) => value.join(" ")).join(", ")
     }
+    
     return {getCoins}
 }
 
@@ -57,7 +58,7 @@ const cheese = itemFactory("cheese",10);
 const items = [bread, ale, cheese]
 
 
-const economyFactory = (itemArray, currency)=>{
+const economyFactory = (itemArray)=>{
     var globalTransform = 1
 
     const revalue = (multiplier)=>{
@@ -71,6 +72,13 @@ const economyFactory = (itemArray, currency)=>{
         itemArray.forEach(element => {
             element.revert()
         });
+    }
+    const display = ()=>{
+        var result = []
+        for (let i = 0; i<itemArray.length;i++){
+            result.push([itemArray[i].name, itemArray[i].getValue()])
+        }
+        return result
     }
     
     const names = () =>{
@@ -99,16 +107,15 @@ const economyFactory = (itemArray, currency)=>{
         return result.getValue();
     }
 
-    const getPrice =(name) =>{
+    const getItem = (name) =>{
         var result = itemArray.find(item => {
             return item.name === name
           })
-        var array = currency.getCoins(result.getValue())
-        
-        return array.map((value) => value.join(" ")).join(", ")
-
+        return result;
     }
-    return {revert, revalue, addItem, changeItemValue, getItemValue, names, getPrice}
+
+    
+    return {revert, revalue, addItem, changeItemValue, getItemValue, names, getItem, display}
 
 }
 
@@ -116,6 +123,6 @@ const smallTown = economyFactory(items,fantasy)
 
  
 
-export { smallTown}
+export { smallTown, fantasy}
 
 
