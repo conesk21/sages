@@ -1,9 +1,11 @@
-
+import { smallTown } from "./classes.js";
+import Card from "./Card.js";
 
 function App() {
+
   return (
     <div>
-      <h1>Sages</h1>
+      <h1>{smallTown.display().map((item, i) => <Card key ={i} item={item} />)}</h1>
     </div>
   );
 }

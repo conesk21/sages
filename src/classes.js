@@ -7,7 +7,7 @@ const coinFactory = (name,denom) => {
 
 const currencyFacory = (coinArray) => {
     const getCoins = (ammount) =>{
-        var result = {}
+        var result = []
         for(let i=coinArray.length-1;i>=0;i--){
             let coinCounter = 0 
             while(ammount>=coinArray[i].getDenom()){
@@ -18,7 +18,7 @@ const currencyFacory = (coinArray) => {
                 coinCounter+=1
             }
             if (coinCounter!== 0){
-            result[coinArray[i].getName()] = coinCounter
+            result.push([coinCounter, coinArray[i].getName()])
             }
         }
         return result
@@ -57,7 +57,7 @@ const cheese = itemFactory("cheese",10);
 const items = [bread, ale, cheese]
 
 
-const economyFactory = (itemArray)=>{
+const economyFactory = (itemArray, currency)=>{
     var globalTransform = 1
 
     const revalue = (multiplier)=>{
@@ -76,7 +76,7 @@ const economyFactory = (itemArray)=>{
     const display = () =>{
         var result = []
         for (let i = 0; i<itemArray.length;i++){
-            result.push(itemArray[i].toString())
+            result.push([itemArray[i].name, currency.getCoins(itemArray[i].getValue())])
         }
         return result
     }
@@ -96,4 +96,11 @@ const economyFactory = (itemArray)=>{
 
 }
 
-const smallTown = economyFactory(items)
+const smallTown = economyFactory(items,fantasy)
+
+smallTown.revalue(3)
+ 
+
+export {smallTown}
+
+
