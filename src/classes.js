@@ -73,10 +73,10 @@ const economyFactory = (itemArray, currency)=>{
         });
     }
     
-    const display = () =>{
+    const names = () =>{
         var result = []
         for (let i = 0; i<itemArray.length;i++){
-            result.push([itemArray[i].name, currency.getCoins(itemArray[i].getValue())])
+            result.push(itemArray[i].name)
         }
         return result
     }
@@ -92,15 +92,30 @@ const economyFactory = (itemArray, currency)=>{
           })
         result.revalue(multiplier);
     }
-    return {revert, revalue, addItem, changeItemValue, display}
+    const getItemValue = (name) =>{
+        var result = itemArray.find(item => {
+            return item.name === name
+          })
+        return result.getValue();
+    }
+
+    const getPrice =(name) =>{
+        var result = itemArray.find(item => {
+            return item.name === name
+          })
+        var array = currency.getCoins(result.getValue())
+        
+        return array.map((value) => value.join(" ")).join(", ")
+
+    }
+    return {revert, revalue, addItem, changeItemValue, getItemValue, names, getPrice}
 
 }
 
 const smallTown = economyFactory(items,fantasy)
 
-smallTown.revalue(3)
  
 
-export {smallTown}
+export { smallTown}
 
 

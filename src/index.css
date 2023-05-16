@@ -1,1 +1,26 @@
+:root{
+     --green: #395B50;
+     --cream: #D5C7BC;
+     --black: #34252F;
+     --white: #F1FFFA;
+}
 
+body{
+    background-color: var(--white);
+}
+
+.card-holder{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.item-card{
+    background-color: var(--cream);
+    border-radius: 10px;
+    color: var(--black);
+    padding: 10px;
+    min-width: 300px;
+    width:fit-content;
+}
