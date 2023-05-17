@@ -14,9 +14,7 @@ const currencyFacory = (coinArray) => {
                 ammount -= coinArray[i].getDenom()
                 coinCounter += 1 
             }
-            if (i===0 && ammount!==0){
-                coinCounter+=1
-            }
+            
             if (coinCounter!== 0){
             result.push([coinCounter, coinArray[i].getName()])
             }

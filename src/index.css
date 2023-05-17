@@ -4,6 +4,7 @@
      --cream: #D5C7BC;
      --black: #34252F;
      --white: #F1FFFA;
+     --taupe: #795C5F;
 }
 
 body{
@@ -16,12 +17,14 @@ body{
 header{
     background-color: var(--green);
     margin: 0;
-    padding: 40px
+    color: var(--white);
+    padding: 40px;
+    opacity: 87%;
 }
 
 .card-holder{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px;
@@ -31,9 +34,79 @@ header{
     background-color: var(--cream);
     border-radius: 10px;
     color: var(--black);
-    padding: 10px;
+    padding: 0px 10px;
     min-width: 300px;
     width:fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-title{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    font-size: 2rem;
+    padding: 20px 0px 0px 0px;
+}
+.item-title h3{
+    margin:0;
+    padding: 0;
+}
+.item-more{
+    font-size: 2rem;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.item-price{
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 0px 20px;
+    margin: 0px;
+    color: var(--black);
+    
+}
+
+.item-var{
+    display: flex;
+    justify-content: space-between;
+    color: var(--taupe);
+    padding: 5px 0px;
+    gap: 10px;
+    align-items: center;
+}
+.item-var input{
+    background-color: var(--white);
+    opacity: 87%;
+    color:#34252F;
+    border: 0; 
+    border-radius: 3px;
+    font-size: 1rem;
+    width: 2ch;
+    font-family: 'Montserrat', Arial, sans-serif;
+    text-align: center;
+}
+.item-var p{
+    font-weight: 700;
+    
+}
+.item-var input::-webkit-outer-spin-button,
+.item-var input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.item-var input:focus{
+    outline: 0;
+    border-radius: 3px;
+}
+
+.item-var p{
+    padding:0;
+    margin: 0;
 }
 
 button{
@@ -43,5 +116,5 @@ button{
     border-radius: 10px;
 }
 button:hover{
-    color: var(--green)
+    color: var(--taupe)
 }
