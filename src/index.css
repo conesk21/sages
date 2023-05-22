@@ -5,6 +5,8 @@
      --black: #34252F;
      --white: #F1FFFA;
      --taupe: #795C5F;
+     --dark-green: #374040;
+     --light-green: #95ADA5;
 }
 
 body{
@@ -21,6 +23,24 @@ header{
     padding: 40px;
     opacity: 87%;
 }
+
+input:focus{
+    outline: 0;
+}
+
+input[type="number"]{
+    font-family: 'Montserrat', Arial, sans-serif;
+    text-align: center;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 
 .card-holder{
     display: flex;
@@ -48,26 +68,87 @@ header{
     flex-wrap: nowrap;
     font-size: 2rem;
     padding: 20px 0px 0px 0px;
+    gap: 10px;
+}
+.item-title{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    font-size: 2rem;
+    padding: 20px 0px 0px 0px;
+    gap: 10px;
+}
+
+.item-title input{
+    background-color: var(--white);
+    font-size: 2rem;
+    border: 0;
+    border-radius: 3px;
+    padding: 3px;
+    color: var(--taupe);
+    font-family: 'Montserrat',  Arial, sans-serif;
+    font-weight: 700;
+    width: 10rem;
+}
+
+.card-buttons{
+    display:flex;
+    gap: 3px;
+    font-weight: 900;
+}
+
+.save{
+    color: var(--green)
+}
+.save:hover{
+    color: var(--light-green)
 }
 .item-title h3{
     margin:0;
     padding: 0;
 }
-.item-more{
+.item-title h3:hover{
+    color: var(--taupe);
+}
+.item-title h3:focus{
+    outline: 0;
+    color: var(--taupe);
+}
+.item-title button{
     font-size: 2rem;
-
     background-color: rgba(0, 0, 0, 0);
 }
 
 .item-price{
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1rem;
     display: flex;
     justify-content: flex-end;
     padding: 0px 0px 20px;
     margin: 0px;
     color: var(--black);
+    gap: 10px;
     
+}
+.item-price span{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.item-price input{
+    font-size: 1rem;
+    color: var(--taupe);
+    border: 0;
+    background-color: var(--white);
+    border-radius: 3px;
+    width: 1ch;
+    text-align: center;
+    
+}
+
+
+
+.item-price span:hover{
+    color: var(--taupe);
 }
 
 .item-var{
@@ -81,7 +162,7 @@ header{
 .item-var input{
     background-color: var(--white);
     opacity: 87%;
-    color:#34252F;
+    color:var(--taupe);
     border: 0; 
     border-radius: 3px;
     font-size: 1rem;
@@ -92,16 +173,6 @@ header{
 .item-var p{
     font-weight: 700;
     
-}
-.item-var input::-webkit-outer-spin-button,
-.item-var input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.item-var input:focus{
-    outline: 0;
-    border-radius: 3px;
 }
 
 .item-var p{

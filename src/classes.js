@@ -6,8 +6,21 @@ const coinFactory = (name,denom) => {
 };
 
 const currencyFacory = (coinArray) => {
-    const getCoins = (ammount) =>{
-        var result = []
+    const valueToCoins = (ammount) =>{
+        var result = {}
+        for(let i=coinArray.length-1;i>=0;i--){
+            let coinCounter = 0 
+            while(ammount>=coinArray[i].getDenom()){
+                ammount -= coinArray[i].getDenom()
+                coinCounter += 1 
+            }
+            result[coinArray[i].getName()] = coinCounter
+            
+        }
+        return result
+    }
+    const valueToString = (ammount) =>{
+        var result = [];
         for(let i=coinArray.length-1;i>=0;i--){
             let coinCounter = 0 
             while(ammount>=coinArray[i].getDenom()){
@@ -21,8 +34,19 @@ const currencyFacory = (coinArray) => {
         }
         return result.map((value) => value.join(" ")).join(", ")
     }
+    const coinToValue = (coinsObject)=>{
+        var value = 0;
+        for (const key in coinsObject){
+            var result = coinArray.find(item => {
+                return item.getName() === key
+              })
+              value += coinsObject[key] * result.getDenom()
+        }
+        return value
+
+    }
     
-    return {getCoins}
+    return {valueToCoins,valueToString,coinToValue}
 }
 
 const copper = coinFactory("copper",.01)

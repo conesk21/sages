@@ -1,13 +1,14 @@
-import React,{Component} from "react";
+import React,{Component, createRef} from "react";
 import { fantasy } from "./classes.js";
+import { isContentEditable } from "@testing-library/user-event/dist/utils/index.js";
 
-class Display extends Component{
+class Slight extends Component{
     constructor(props) {
         super(props);
         this.state = {
             value: props.value,
-            discount: {value: 10, price: fantasy.getCoins( props.value*.9)},
-            markup: {value: 10, price: fantasy.getCoins( props.value*1.1)},
+            discount: {value: 10, price: fantasy.valueToString( props.value*.9)},
+            markup: {value: 10, price: fantasy.valueToString( props.value*1.1)},
         };
     }
     changeDiscount = (e) =>{
@@ -21,7 +22,7 @@ class Display extends Component{
 
         this.setState(
             {
-                discount:{value: e.target.value, price: fantasy.getCoins(this.state.value*dis)}
+                discount:{value: e.target.value, price: fantasy.valueToString(this.state.value*dis)}
             }
         )
         
@@ -37,7 +38,7 @@ class Display extends Component{
 
         this.setState(
             {
-                markup:{value: e.target.value, price: fantasy.getCoins(this.state.value*mar)}
+                markup:{value: e.target.value, price: fantasy.valueToString(this.state.value*mar)}
             }
         )
         
@@ -54,44 +55,152 @@ class Display extends Component{
     }
 }
 
+class Form extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+           title: props.title,
+           coins: props.coins
+        };
+    }
+
+    onTitleChange=(e)=>{
+        if (e.target.value.toString().length===0){
+            e.target.style.width = 2 + "ch"; 
+        }else {
+            e.target.style.width = e.target.value.toString().length + "ch";
+        }
+        this.setState(
+            {
+            title: e.target.value}
+
+        )
+    }
+
+    onCoinChange=(e)=>{
+        if (e.target.value.toString().length===0){
+            e.target.style.width = 2 + "ch"; 
+        }else {
+            e.target.style.width = e.target.value.toString().length + "ch";
+        }
+        var cons = this.state.coins
+        cons[e.target.name] = e.target.value
+        this.setState(
+            {
+            coins: cons
+            }
+
+        )
+    }
+
+
+
+
+    render(){
+        var coinInputs = [];
+        for (var key in this.state.coins){
+            coinInputs.push(<label for={key}>
+                <input onChange={this.onCoinChange}type="number" name={key} value={this.state.coins[key]}></input> 
+                {key}</label>)
+        }
+    return (
+        <div className="item-card">
+        <div className="item-title">
+        <input onChange={this.onTitleChange} value={this.state.title}></input>
+                <div className="card-buttons">
+                <button onClick={ this.props.onRevert}>
+                    <span className="material-symbols-outlined">close</span>
+                </button>
+                <button onClick={()=>(this.props.onSave(this.state.title, fantasy.coinToValue(this.state.coins)))}className="save">
+                    <span className="material-symbols-outlined">done</span>
+                </button>
+                </div>
+            </div> 
+            <div className="item-price">
+             {coinInputs} 
+            </div>
+        </div>
+    )
+
+    }
+
+}
+
+class Display extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: props.name,
+            value: props.value,
+            middle: false,
+            price: fantasy.valueToString(props.value),
+        };
+    }
+
+
+    render(){
+    return(
+        <div className="item-card">
+            <div className="item-title">
+            <h3 onClick={this.props.onRevert}>{this.state.name}</h3>
+            <button className="item-more" onClick={() => this.setState({ middle: !this.state.middle})}>
+                <span className="material-symbols-outlined">more_horiz</span>
+                </button>
+            </div> 
+            {this.state.middle && <Slight value={this.state.value}/> }
+            <div className="item-price">
+            <span onClick={this.props.onRevert}>{this.state.price}</span>   
+            </div>  
+      </div>
+    )
+    }
+}
+
+
+
 class Card extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            item: props.item,
-            view: "static",
-            price: fantasy.getCoins(props.item.getValue()),
+            name: props.item.name,
+            value: props.item.getValue(),
+            edit: false,
         };
     }
-    
-    changeView = (e) =>{
-        var ne;
-        this.state.view === "edit"? ne="static": ne = "edit"
-        this.setState({
-            view: ne
-            });
-            
-        
+
+    onRevert=(e)=>{
+        this.setState(
+            {
+                edit: !this.state.edit,
+            }
+        )
     }
 
-    render(){
+    onSave =(title, val)=>{
+        this.setState({
+            edit: !this.state.edit,
+            name: title,
+            value: val,
+            price: fantasy.valueToString(val)
+        }
+            
+        )
+    }
 
+
+    render(){
+        var show;
+        if (this.state.edit){
+            show = <Form title={this.state.name} coins={fantasy.valueToCoins(this.state.value)} onRevert={this.onRevert} onSave={this.onSave}/>
+        } else {
+            show = <Display name={this.state.name} value={this.state.value} onRevert={this.onRevert} /> 
+        }
     return (
-        <div className="item-card">
-            <div className="item-title">
-            <h3>{this.state.item.name}</h3>
-            <button className="item-more" onClick={this.changeView}><span className="material-symbols-outlined">
-more_horiz
-</span></button>
-            </div>
-            
-            
-            {this.state.view === "edit" && <Display value={this.state.item.getValue()}/> }
-            <div className="item-price">
-             <span>{this.state.price}</span>   
-            </div>
-            
-        </div>
+
+      <div>
+        {show}
+      </div>
+        
     )
     }
 }
