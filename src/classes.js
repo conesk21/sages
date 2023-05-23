@@ -66,11 +66,12 @@ const itemFactory = (name, value)=>{
         value = value*multiplier;
 
     }
+    const setValue = (newValue) => {value = newValue}
     const getValue = () => value;
 
     const toString = () => name + ": " + value.toString();
 
-    return {name, revert, revalue, getValue, toString}
+    return {name, revert, revalue, getValue, toString, setValue}
 }
 
 const bread = itemFactory("bread",2);
@@ -145,6 +146,6 @@ const smallTown = economyFactory(items,fantasy)
 
  
 
-export { smallTown, fantasy}
+export {items, fantasy}
 
 

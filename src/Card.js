@@ -1,6 +1,5 @@
-import React,{Component, createRef} from "react";
+import React,{Component} from "react";
 import { fantasy } from "./classes.js";
-import { isContentEditable } from "@testing-library/user-event/dist/utils/index.js";
 
 class Slight extends Component{
     constructor(props) {
@@ -60,7 +59,8 @@ class Form extends Component{
         super(props);
         this.state = {
            title: props.title,
-           coins: props.coins
+           coins: props.coins,
+           value: 0
         };
     }
 
@@ -87,11 +87,19 @@ class Form extends Component{
         cons[e.target.name] = e.target.value
         this.setState(
             {
-            coins: cons
+            coins: cons,
             }
 
         )
     }
+
+    onSave=(e)=>{
+        if(fantasy.coinToValue(this.state.coins)>0 & this.state.title !== ""){
+            this.props.onSave(this.state.title, fantasy.coinToValue(this.state.coins))
+    } else {
+        alert("An item can't be worthless! It's special in its own way...")
+    }
+}
 
 
 
@@ -111,7 +119,7 @@ class Form extends Component{
                 <button onClick={ this.props.onRevert}>
                     <span className="material-symbols-outlined">close</span>
                 </button>
-                <button onClick={()=>(this.props.onSave(this.state.title, fantasy.coinToValue(this.state.coins)))}className="save">
+                <button onClick={this.onSave}className="save">
                     <span className="material-symbols-outlined">done</span>
                 </button>
                 </div>
@@ -142,14 +150,14 @@ class Display extends Component{
     return(
         <div className="item-card">
             <div className="item-title">
-            <h3 onClick={this.props.onRevert}>{this.state.name}</h3>
+            <h3 onClick={this.props.changeDisplay}>{this.state.name}</h3>
             <button className="item-more" onClick={() => this.setState({ middle: !this.state.middle})}>
                 <span className="material-symbols-outlined">more_horiz</span>
                 </button>
             </div> 
             {this.state.middle && <Slight value={this.state.value}/> }
             <div className="item-price">
-            <span onClick={this.props.onRevert}>{this.state.price}</span>   
+            <span onClick={this.props.changeDisplay}>{this.state.price}</span>   
             </div>  
       </div>
     )
@@ -162,29 +170,34 @@ class Card extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            name: props.item.name,
-            value: props.item.getValue(),
-            edit: false,
+            name: props.name,
+            value: props.val,
+            edit: props.edit,
         };
     }
 
     onRevert=(e)=>{
+        this.props.onRevert()
+        this.changeDisplay()
+    }
+
+    changeDisplay = (e)=>{
         this.setState(
             {
-                edit: !this.state.edit,
+                edit: !this.state.edit
             }
         )
     }
 
     onSave =(title, val)=>{
+        this.props.onSave(this.state.name, title, val)
         this.setState({
-            edit: !this.state.edit,
             name: title,
             value: val,
             price: fantasy.valueToString(val)
-        }
-            
-        )
+        })
+        this.changeDisplay()
+        
     }
 
 
@@ -193,7 +206,7 @@ class Card extends Component{
         if (this.state.edit){
             show = <Form title={this.state.name} coins={fantasy.valueToCoins(this.state.value)} onRevert={this.onRevert} onSave={this.onSave}/>
         } else {
-            show = <Display name={this.state.name} value={this.state.value} onRevert={this.onRevert} /> 
+            show = <Display name={this.state.name} value={this.state.value} changeDisplay={this.changeDisplay} /> 
         }
     return (
 
