@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { itemFactory } from "./classes.js";
 
 import Card from "./Card.js";
 
@@ -21,31 +22,40 @@ class Holder extends Component {
     super(props);
     this.state = {
       itemArray: props.items,
-      temp: []
+      temp: false
     };
 }
   addItem = () =>{
-    var tempItem = {name: "", value: 0}
     this.setState({
-      temp: [tempItem]
+      temp: true
     })
     
   }
 
   onSave =(oldName, newName, newVal)=>{
-    this.setState({itemArray: this.state.itemArray.filter(function(item) { 
+    if (oldName===""){
+      var newItem = itemFactory(newName,newVal)
+      this.state.itemArray.push(newItem)
+
+    } else{
+      this.setState({itemArray: this.state.itemArray.filter(function(item) { 
       if (item.name === oldName ){
         item.name = newName
         item.setValue(newVal)
       }
       return item
   })});
+    }
+    this.setState({
+      temp: false
+    })
+    
 
   }
 
   onRevert = ()=>{
     this.setState({
-      temp: []
+      temp: false
     })
   } 
 
@@ -62,9 +72,9 @@ class Holder extends Component {
       {this.state.itemArray.map((items, i) =>{
         return <Card key={i} name={items.name} val={items.getValue()} edit={false} onSave={this.onSave} onRevert={this.onRevert}/>
       })}
-      {this.state.temp.map((items, i) =>{
-        return <Card key={i+"temp"} name={items.name} val={items.value} edit={true} onSave={this.onSave} onRevert={this.onRevert}/>
-      })}
+
+      {this.state.temp && <Card key={"temp"} name={""} val={0} edit={true} onSave={this.onSave} onRevert={this.onRevert}/>
+      }
       <button onClick={this.addItem} className="card-button">
         <h3>new item</h3>
         </button>

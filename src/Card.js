@@ -65,10 +65,10 @@ class Form extends Component{
     }
 
     onTitleChange=(e)=>{
-        if (e.target.value.toString().length===0){
-            e.target.style.width = 2 + "ch"; 
+        if (e.target.value.toString().length<=5){
+            e.target.style.width = 6 + "ch"; 
         }else {
-            e.target.style.width = e.target.value.toString().length + "ch";
+            e.target.style.width = (e.target.value.toString().length + 2 )+ "ch";
         }
         this.setState(
             {
@@ -78,11 +78,6 @@ class Form extends Component{
     }
 
     onCoinChange=(e)=>{
-        if (e.target.value.toString().length===0){
-            e.target.style.width = 2 + "ch"; 
-        }else {
-            e.target.style.width = e.target.value.toString().length + "ch";
-        }
         var cons = this.state.coins
         cons[e.target.name] = e.target.value
         this.setState(
@@ -191,11 +186,14 @@ class Card extends Component{
 
     onSave =(title, val)=>{
         this.props.onSave(this.state.name, title, val)
-        this.setState({
-            name: title,
-            value: val,
-            price: fantasy.valueToString(val)
-        })
+       
+            this.setState({
+                name: title,
+                value: val,
+                price: fantasy.valueToString(val)
+            })
+        
+        
         this.changeDisplay()
         
     }

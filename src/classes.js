@@ -146,6 +146,6 @@ const smallTown = economyFactory(items,fantasy)
 
  
 
-export {items, fantasy}
+export {items, itemFactory, fantasy}
 
 
