@@ -23,7 +23,10 @@ header{
     padding: 40px;
     opacity: 87%;
 }
-
+input{
+    border: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
 input:focus{
     outline: 0;
 }
@@ -41,7 +44,84 @@ input::-webkit-inner-spin-button {
 }
 
 
+.globals{
+    margin: 0;
+    width: 100%;
+    background-color: var(--dark-green);
+    padding: 40px 20px ;
+    color: var(--light-green);
+    opacity: 87%;
+    font-size: 1.6rem;
+}
 
+.globals select{
+    background-color: var(--white);
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.5rem;
+    border: var(--dark-green) 1px solid;
+    outline: 0;
+    padding: 3px;
+    border-radius: 3px;
+    margin: 3px;
+}
+.globals option:checked{
+    color: var(--black)
+}
+option:hover{
+    color: var(--taupe)
+}
+
+
+.globals label{
+    padding: 10px;
+}
+
+.globals input{
+    font-size: 1.5rem;
+    width: 3ch;
+    background-color: var(--white);
+    border-radius: 3px;
+    margin: 3px;
+    padding: 3px;
+}
+.globals {
+    text-align: center;
+    
+}
+
+.globals button{
+    font-size: 1.5rem;
+    padding: .5rem 3rem;
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    display: block;
+    margin: 20px auto 0px;
+}
+
+.globals h4{
+    color: var(--white);
+    font-size: 2rem;
+}
+
+
+
+.globals button:hover{
+    background-color: var(--black);
+    color: var(--white);
+    outline: 2px var(--white) solid;
+}
+
+.globals h4{
+    margin: 10px 0px;
+}
+
+.globals p{
+    margin: 0;
+    font-size: 1.4rem;
+}
+.globals p:last-of-type{
+    margin-bottom: 20px;
+}
 .card-holder{
     display: flex;
     align-items: flex-start;
@@ -208,11 +288,3 @@ button:hover{
     color: var(--white)
 }
 
-.globals{
-    margin: 0;
-    width: 100%;
-    background-color: var(--dark-green);
-    padding: 40px 20px ;
-    color: var(--light-green);
-    opacity: 87%;
-}

@@ -48,18 +48,23 @@ class Revalue extends Component{
       var coinInputs = [];
       for (var key in this.state.coins){
           coinInputs.push(<label for={key}>
-              <input onChange={this.onCoinChange}type="number" name={key} value={this.state.coins[key]}></input> 
+              <input onChange={this.onCoinChange}type="number" key={key} name={key} value={this.state.coins[key]}></input> 
               {key}</label>)
       }
       return(
+        <div>
+          <h4>REVALUE</h4>
+          <p >adjust the price of all items relative to the change made to one specific item</p>
+          <p>(i.e. doubling the price of bread will double the price of everything)</p>
         <form>
-            1 <select onChange={this.onChangeSelect}>
+            <select onChange={this.onChangeSelect}>
             {this.props.items.map((item, i)=>{
               return <option value={item.name} key={i} data={item.getValue()}>{item.name}</option>
             })}
-          </select> = {coinInputs}
-          <button type="submit" onClick={this.onSave}>revalue</button>
+          </select> <span>is worth</span>{coinInputs}
+          <button type="submit" onClick={this.onSave}>REVALUE</button>
         </form>
+        </div>
       )
     }
   }
