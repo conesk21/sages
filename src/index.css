@@ -30,9 +30,12 @@ header{
     background-color: var(--green);
     margin: 0;
     color: var(--white);
-    padding: 40px;
+    padding: 40px 0px;
     opacity: 87%;
     width: 100%
+}
+header h1{
+    padding-left: 20px;
 }
 input{
     border: 0;
@@ -62,14 +65,44 @@ input::-webkit-inner-spin-button {
 
 .globals{
     margin: 0;
+    padding: 0;
     width: 100%;
     background-color: var(--dark-green);
-    padding: 40px 20px ;
     color: var(--light-green);
     opacity: 87%;
     font-size: 1.6rem;
 }
+.globals *{
+    margin: 0;
+    padding: 0;
+}
+.global-content{
+    padding: 40px 20px;
+}
 
+.globals h2{
+    color: var(--white);
+}
+.tranformations{
+    background-color: var(--black)
+}
+.globals .colapsible{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--light-green);
+    color: var(--black);
+    width: 100%
+}
+.colapsible *{
+    padding: 10px;
+}
+
+.globals .colapsible button{
+    background-color: rgba(0, 0, 0, 0);
+    margin:0;
+    font-weight: 700;
+}
 .globals select{
     background-color: var(--white);
     font-family: 'Montserrat', Arial, sans-serif;
@@ -100,28 +133,38 @@ option:hover{
     margin: 3px;
     padding: 3px;
 }
-.globals {
-    text-align: center;
-    
-}
 
-.globals button{
+
+.content button{
     font-size: 1.5rem;
     padding: .5rem 3rem;
-    background-color: var(--light-green);
-    color: var(--dark-green);
-    display: block;
-    margin: 20px auto 0px;
+    background-color: var(--white);
+    color: var(--black);
+    display: inline-block;
 }
 
 .globals h4{
-    color: var(--white);
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
+.content{
+    width: 100%;
+    margin: 0;
+    padding: 20px 0px;
+}
+.content p, .content form{
+    padding: 0px 20px;
+}
 
+.global-form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
 
-.globals button:hover{
+.content button:hover{
     background-color: var(--black);
     color: var(--white);
     outline: 2px var(--white) solid;

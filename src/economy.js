@@ -7,7 +7,8 @@ class Globals extends Component{
   constructor(props) {
     super(props);
     this.state ={
-      global: 1
+      global: 1,
+      revalue: false
     };
 }
   onRevalue = (multiplier) =>{
@@ -21,9 +22,32 @@ class Globals extends Component{
   }
 
   render(){
+    var revalSpan;
+    if (this.state.revalue){
+      revalSpan = <span class="material-symbols-outlined">
+      expand_less
+      </span>
+    } else {
+      revalSpan = <span class="material-symbols-outlined">
+      expand_more
+      </span>
+    }
     return(
       <section className="globals">
-        <Revalue items={this.props.items} onChange={this.onRevalue}/>
+        <div className="global-content">
+        <h2>cross-economy changes</h2>
+        <p>changes that will effect every item within the economy</p>
+        <div className="tranformations">
+          <div className="colapsible"><h4>revalue</h4> 
+          <button onClick={()=>{
+            this.setState({
+              revalue: !this.state.revalue
+            })
+          }}>
+            {revalSpan}</button></div>
+       {this.state.revalue && <Revalue items={this.props.items} onChange={this.onRevalue}/>} 
+       </div>
+       </div>
       </section>
     )
   }

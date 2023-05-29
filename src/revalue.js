@@ -58,18 +58,18 @@ class Revalue extends Component{
               {key}</label>)
       }
       return(
-        <div>
-          <h4>REVALUE</h4>
-          <p >adjust the price of all items relative to the change made to one specific item</p>
-          <p>(i.e. doubling the price of bread will double the price of everything)</p>
+        <div className = "content">
+          <p >adjust the price of all items relative to the change made to one specific item (i.e. doubling the price of bread will double the price of everything)</p>
         <form>
+            <div className="global-form">
+              <div>
             <select onChange={this.onChangeSelect}>
             {this.props.items.map((item, i)=>{
               return <option value={item.name} key={i} data={item.getValue()}>{item.name}</option>
             })}
-          </select> <span>is worth</span>{coinInputs}
+          </select> <span>is worth</span>{coinInputs}</div>
           <button type="submit" onClick={this.onSave}>REVALUE</button>
-        </form>
+        </div></form>
         </div>
       )
     }
