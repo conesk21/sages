@@ -7,11 +7,13 @@ class Globals extends Component{
   constructor(props) {
     super(props);
     this.state ={
-      
+      global: 1
     };
 }
   onRevalue = (multiplier) =>{
-  
+   this.setState({
+    global: this.state.global*multiplier
+   })
    this.props.onChange(this.props.items.filter((item)=>{
     item.revalue(multiplier)
     return item

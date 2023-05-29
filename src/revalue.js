@@ -40,7 +40,13 @@ class Revalue extends Component{
     var oldVal = this.state.items[this.state.index].getValue()
     var newVal = fantasy.coinToValue(this.state.coins);
     var reval = newVal/oldVal
-    this.props.onChange(reval)
+    if (newVal=== 0){
+      alert("You can't revalue an item to zero, because it will revalue everything to zero!")
+    } else {
+      this.props.onChange(reval)
+    }
+    
+    
   
 
   }
