@@ -1,3 +1,5 @@
+var bigDecimal = require('js-big-decimal');
+
 const coinFactory = (name,denom) => {
     const getName = () => name;
     const getDenom = () => denom;
@@ -8,11 +10,20 @@ const coinFactory = (name,denom) => {
 const currencyFacory = (coinArray) => {
     const valueToCoins = (ammount) =>{
         var result = {}
-        for(let i=coinArray.length-1;i>=0;i--){
-            let coinCounter = 0 
-            while(ammount>=coinArray[i].getDenom()){
-                ammount -= coinArray[i].getDenom()
-                coinCounter += 1 
+        var ammountDec = new bigDecimal(ammount).round(2)
+        for(var i=coinArray.length-1;i>=0;i--){
+            var coinCounter = 0 
+            var denomDec = new bigDecimal(coinArray[i].getDenom()).round(2)
+            var value = ammountDec.compareTo(denomDec)
+            while(true){
+                if (value === -1){
+                    break
+                } else{
+                    ammountDec = ammountDec.subtract(denomDec)
+                    coinCounter += 1 
+                    value = ammountDec.compareTo(denomDec)
+                }
+               
             }
             result[coinArray[i].getName()] = coinCounter
             
@@ -21,11 +32,20 @@ const currencyFacory = (coinArray) => {
     }
     const valueToString = (ammount) =>{
         var result = [];
-        for(let i=coinArray.length-1;i>=0;i--){
-            let coinCounter = 0 
-            while(ammount>=coinArray[i].getDenom()){
-                ammount -= coinArray[i].getDenom()
-                coinCounter += 1 
+        var ammountDec = new bigDecimal(ammount).round(2)
+        for(var i=coinArray.length-1;i>=0;i--){
+            var coinCounter = 0 
+            var denomDec = new bigDecimal(coinArray[i].getDenom()).round(2)
+            var value = ammountDec.compareTo(denomDec)
+            while(true){
+                if (value === -1){
+                    break
+                } else{
+                    ammountDec = ammountDec.subtract(denomDec)
+                    coinCounter += 1 
+                    value = ammountDec.compareTo(denomDec)
+                }
+               
             }
             
             if (coinCounter!== 0){
