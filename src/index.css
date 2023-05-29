@@ -10,10 +10,20 @@
 }
 
 body{
+    
     background-color: var(--white);
     margin: 0;
     color: var(--cream);
     font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.root{
+    width: 100%
 }
 
 header{
@@ -22,6 +32,7 @@ header{
     color: var(--white);
     padding: 40px;
     opacity: 87%;
+    width: 100%
 }
 input{
     border: 0;
@@ -42,7 +53,12 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.veiw{
+    width:100%
+}
+.economy{
+    width: 100%
+}
 
 .globals{
     margin: 0;

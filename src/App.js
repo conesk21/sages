@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     
     return (
-      <div >
+      <div className="veiw">
         <Header />
         <Economy items={items}/>
 

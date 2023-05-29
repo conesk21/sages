@@ -113,7 +113,7 @@ class Economy extends Component{
 
   render(){
     return (
-      <div>
+      <div className="economy">
         <Globals items={this.state.items} onChange={this.newItemArray}/>
         <Holder items={this.state.items} onChange={this.newItemArray}/>
       </div>

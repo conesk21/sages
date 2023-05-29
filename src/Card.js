@@ -147,7 +147,7 @@ class Display extends Component{
                 <span className="material-symbols-outlined">more_horiz</span>
                 </button>
             </div> 
-            {this.state.middle && <Slight value={this.state.value}/> }
+            {this.state.middle && <Slight value={this.props.value}/> }
             <div className="item-price">
             <span onClick={this.props.changeDisplay}>{fantasy.valueToString(this.props.value)}</span>   
             </div>  
