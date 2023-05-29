@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { itemFactory } from "./classes.js";
+import Revert from "./revert.js";
 import Revalue from "./revalue.js";
 import Card from "./Card.js";
 
@@ -8,7 +9,8 @@ class Globals extends Component{
     super(props);
     this.state ={
       global: 1,
-      revalue: false
+      revalue: false,
+      revert: false
     };
 }
   onRevalue = (multiplier) =>{
@@ -22,16 +24,14 @@ class Globals extends Component{
   }
 
   render(){
-    var revalSpan;
-    if (this.state.revalue){
-      revalSpan = <span class="material-symbols-outlined">
+    
+    const trueSpan = <span class="material-symbols-outlined">
       expand_less
-      </span>
-    } else {
-      revalSpan = <span class="material-symbols-outlined">
+      </span>;
+    const falseSpan = <span class="material-symbols-outlined">
       expand_more
-      </span>
-    }
+      </span>;
+    
     return(
       <section className="globals">
         <div className="global-content">
@@ -44,8 +44,16 @@ class Globals extends Component{
               revalue: !this.state.revalue
             })
           }}>
-            {revalSpan}</button></div>
-       {this.state.revalue && <Revalue items={this.props.items} onChange={this.onRevalue}/>} 
+            {this.state.revalue?trueSpan:falseSpan}</button></div>
+       {this.state.revalue && <Revalue items={this.props.items} onChange={this.onRevalue}/>}
+       <div className="colapsible"><h4>revert</h4> 
+          <button onClick={()=>{
+            this.setState({
+              revert: !this.state.revert
+            })
+          }}>
+            {this.state.revert?trueSpan:falseSpan}</button></div>
+       {this.state.revert && <Revert global={this.state.global} onChange={this.onRevalue}/>}  
        </div>
        </div>
       </section>

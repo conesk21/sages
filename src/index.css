@@ -83,9 +83,7 @@ input::-webkit-inner-spin-button {
 .globals h2{
     color: var(--white);
 }
-.tranformations{
-    background-color: var(--black)
-}
+
 .globals .colapsible{
     display: flex;
     align-items: center;
