@@ -18,6 +18,7 @@ class Revert extends Component{
           <p>un-does previous transformations</p>
         <form>
             <div className="global-form">
+
           <button type="submit" onClick={this.onSave}>REVERT</button>
         </div></form>
         </div>

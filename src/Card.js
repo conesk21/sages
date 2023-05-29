@@ -102,8 +102,8 @@ class Form extends Component{
     render(){
         var coinInputs = [];
         for (var key in this.state.coins){
-            coinInputs.push(<label for={key}>
-                <input onChange={this.onCoinChange}type="number" name={key} value={this.state.coins[key]}></input> 
+            coinInputs.push(<label htmlFor={key}>
+                <input onChange={this.onCoinChange}type="number" name={key} key={key} value={this.state.coins[key]}></input> 
                 {key}</label>)
         }
     return (
@@ -197,7 +197,6 @@ class Card extends Component{
 
 
     render(){
-        console.log("render " + this.state.name + " props "+ this.props.val + " state " + this.state.value)
         var show;
         if (this.state.edit){
             show = <Form title={this.props.name} coins={fantasy.valueToCoins(this.props.val)} onRevert={this.onRevert} onSave={this.onSave}/>
