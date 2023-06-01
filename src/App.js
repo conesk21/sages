@@ -3,6 +3,7 @@ import SideNav from "./SideNav.js";
 import Economy from "./economy.js";
 import { itemFactory, items } from "./classes.js";
 import data from "./items.json";
+import CurrencyForm from "./CurrencyForm.js";
 const itemArray = data.map((item)=>{
   return itemFactory(item[0],item[1])
 })
@@ -24,7 +25,7 @@ class App extends Component {
       <div className="veiw">
         <SideNav onChange={this.changeVeiw}/>
         {this.state.view && <Economy items={itemArray}/>}
-
+        {!this.state.view && <CurrencyForm />}
       </div>)
   }
 }

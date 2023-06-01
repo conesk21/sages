@@ -3,10 +3,10 @@
      --green: #395B50;
      --cream: #D5C7BC;
      --black: #34252F;
-     --white: #F1FFFA;
+     --white: #EDECE8;
      --taupe: #795C5F;
      --dark-green: #374040;
-     --light-green: #95ADA5;
+     --light-green: #849E88;
 }
 
 body{
@@ -15,6 +15,8 @@ body{
     margin: 0;
     color: var(--cream);
     font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
 }
 html, body {
     width: 100%;
@@ -22,6 +24,38 @@ html, body {
     margin: 0px;
     padding: 0px;
 }
+
+h1{
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 500;
+}
+h2{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 500;
+}
+h3{
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+h4{
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+h5{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+}
+h6{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+
 .root{
     width: 100%
 }
@@ -39,10 +73,17 @@ html, body {
     padding-left: 10px;
   }
 
-  .economy {
+  .sidenav button{
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--white);
+    display: block;
+  }
+
+  .economy, .currency {
     margin-left: 300px; 
     padding: 0px;
   }
+
 
 
 input{
@@ -78,7 +119,6 @@ input::-webkit-inner-spin-button {
     background-color: var(--dark-green);
     color: var(--light-green);
     opacity: 87%;
-    font-size: 1.6rem;
 }
 .globals *{
     margin: 0;
@@ -112,7 +152,6 @@ input::-webkit-inner-spin-button {
 .globals select{
     background-color: var(--white);
     font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 1.5rem;
     border: var(--dark-green) 1px solid;
     outline: 0;
     padding: 3px;
@@ -132,7 +171,6 @@ option:hover{
 }
 
 .globals input{
-    font-size: 1.5rem;
     width: 3ch;
     background-color: var(--white);
     border-radius: 3px;
@@ -142,16 +180,13 @@ option:hover{
 
 
 .content button{
-    font-size: 1.5rem;
+  
     padding: .5rem 3rem;
     background-color: var(--white);
     color: var(--black);
     display: inline-block;
 }
 
-.globals h4{
-    font-size: 1.8rem;
-}
 
 .content{
     width: 100%;
@@ -182,7 +217,7 @@ option:hover{
 
 .globals p{
     margin: 0;
-    font-size: 1.4rem;
+   
 }
 .globals p:last-of-type{
     margin-bottom: 20px;
@@ -214,7 +249,6 @@ option:hover{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    font-size: 2rem;
     padding: 20px 0px 0px 0px;
     gap: 10px;
     flex: 1
@@ -223,14 +257,14 @@ option:hover{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-    font-size: 2rem;
+    
     padding: 20px 0px 0px 0px;
     gap: 10px;
 }
 
 .item-title input{
     background-color: var(--white);
-    font-size: 2rem;
+    
     border: 0;
     border-radius: 3px;
     padding: 3px;
@@ -264,12 +298,10 @@ option:hover{
     color: var(--taupe);
 }
 .item-title button{
-    font-size: 2rem;
     background-color: rgba(0, 0, 0, 0);
 }
 
 .item-price{
-    font-size: 1rem;
     display: flex;
     justify-content: flex-end;
     padding: 10px 0px 20px;
@@ -280,12 +312,10 @@ option:hover{
     
 }
 .item-price span{
-    font-size: 1.8rem;
     font-weight: 700;
 }
 
 .item-price input{
-    font-size: 1rem;
     color: var(--taupe);
     border: 0;
     background-color: var(--white);
@@ -316,7 +346,6 @@ option:hover{
     color:var(--taupe);
     border: 0; 
     border-radius: 3px;
-    font-size: 1rem;
     width: 2ch;
     font-family: 'Montserrat', Arial, sans-serif;
     text-align: center;
@@ -348,7 +377,6 @@ button:hover{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
     height: 134px;
 }
 
@@ -357,4 +385,14 @@ button:hover{
     background-color: var(--green);
     color: var(--white)
 }
+
+
+.currency-form{
+   background-color: var(--taupe);
+   padding: 20px;
+
+    
+}
+
+
 
