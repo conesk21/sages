@@ -26,17 +26,25 @@ html, body {
     width: 100%
 }
 
-header{
+.sidenav {
+    height: 100%; 
+    width: 300px; 
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0;
     background-color: var(--green);
-    margin: 0;
-    color: var(--white);
-    padding: 40px 0px;
-    opacity: 87%;
-    width: 100%
-}
-header h1{
-    padding-left: 20px;
-}
+    overflow-x: hidden; 
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+
+  .economy {
+    margin-left: 300px; 
+    padding: 0px;
+  }
+
+
 input{
     border: 0;
     font-family: 'Montserrat', Arial, sans-serif;
@@ -180,23 +188,26 @@ option:hover{
     margin-bottom: 20px;
 }
 .card-holder{
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
+    display: grid;
+    padding: 20px;
+    width: 96%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+   
 }
+
 
 .item-card{
     background-color: var(--cream);
     border-radius: 10px;
     color: var(--black);
     padding: 0px 10px;
-    min-width: 300px;
-    width:fit-content;
+    height: 212px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-content: space-between;
 }
 
 .item-title{
@@ -206,6 +217,7 @@ option:hover{
     font-size: 2rem;
     padding: 20px 0px 0px 0px;
     gap: 10px;
+    flex: 1
 }
 .item-title{
     display: flex;
@@ -264,10 +276,11 @@ option:hover{
     margin: 0px;
     color: var(--black);
     gap: 10px;
+    flex: 1;
     
 }
 .item-price span{
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
 }
 
