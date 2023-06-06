@@ -18,6 +18,7 @@ body{
     font-size: 0.8125rem;
     line-height: 1.25rem;
 }
+
 html, body {
     width: 100%;
     height: 100%;
@@ -54,6 +55,14 @@ h6{
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 500;
+}
+
+select:hover{
+    border: 0;
+}
+
+select:focus{
+    outline: 0;
 }
 
 .root{
@@ -393,6 +402,97 @@ button:hover{
 
     
 }
+.currency-form .side-note{
+    padding-top: 0px;
+    margin-top: -15px;
+}
+.side-note span{
+    color: var(--white);
+}
+.currency-form h4{
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+.currency-form .preview{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: middle;
 
+}
+.currency-form button{
+    font-size: .8rem;
+}
+.currency-form .coin-card{
+    background-color: var(--cream);
+    color: var(--black);
+    margin:0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: middle;
+    border-radius: 3px;
+    text-align: center;
+    gap: 10px;
+    min-width: 11ch;
+}
+.coin-card button{
+    margin-top: 10px;
+}
+.denominations,.previews,.conversions{
+    padding-left: 20px;
+}
+.currency-form .preview{
+    border-top: 1px var(--cream) solid;
+    border-bottom: 1px var(--cream) solid;
+    width: fit-content;
+    padding: 5px 0px;
+}
 
+.denominations .add-coin{
+    padding: 10px 30px;
+    margin-bottom: 10px;
+    background-color: var(--white);
+}
 
+.currency-form select{
+    border-radius: 3px;
+    padding: 3px;
+}
+.coin-card input{
+    display: block;
+    width: 10ch;
+    text-align: center;
+}
+
+.coin-card p{
+    margin: 0;
+    padding: 0;
+}
+.coin-card p:hover{
+    color: var(--taupe)
+}
+.coin-card button{
+    background-color: rgba(0, 0, 0, 0);
+}
+.conversions{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.conversions input{
+    width: 3ch;
+    background-color: var(--cream);
+}
+
+.currency-form .primary{
+    padding: 2ch 10ch;
+    margin: 10px;
+    width: 98%
+}
+.currency-form .primary:hover{
+    background-color: var(--cream);
+}
