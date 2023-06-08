@@ -17,6 +17,7 @@ body{
     font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 0.8125rem;
     line-height: 1.25rem;
+    accent-color: var(--green);
 }
 
 html, body {
@@ -61,6 +62,12 @@ select:hover{
     border: 0;
 }
 
+select{
+    outline: 0;
+    border: 0;
+    accent-color: var(--green);
+}
+
 select:focus{
     outline: 0;
 }
@@ -78,16 +85,27 @@ select:focus{
     left: 0;
     background-color: var(--green);
     overflow-x: hidden; 
-    padding-top: 20px;
-    padding-left: 10px;
   }
 
   .sidenav button{
     background-color: rgba(0, 0, 0, 0);
     color: var(--white);
     display: block;
+    border-radius: 0;
+    text-align: left;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+
   }
 
+.sidenav h4,.sidenav h1{
+    padding-left: 20px;
+}
+.sidenav button:hover{
+    background-color: var(--dark-green);
+    color: var(--white);
+}
   .economy, .currency {
     margin-left: 300px; 
     padding: 0px;
@@ -117,24 +135,21 @@ input::-webkit-inner-spin-button {
 .veiw{
     width:100%
 }
-.economy{
-    width: 100%
-}
+
 
 .globals{
     margin: 0;
     padding: 0;
-    width: 100%;
-    background-color: var(--dark-green);
-    color: var(--light-green);
-    opacity: 87%;
+    width: calc(1vh-300px);
+    background-color: var(--light-green);
+    color: var(--dark-green);
 }
 .globals *{
     margin: 0;
     padding: 0;
 }
 .global-content{
-    padding: 40px 20px;
+    padding: 40px 40px;
 }
 
 .globals h2{
@@ -147,7 +162,9 @@ input::-webkit-inner-spin-button {
     justify-content: space-between;
     background-color: var(--light-green);
     color: var(--black);
-    width: 100%
+    width: 100%;
+    border-bottom: rgba(52, 37, 47, .5)
+    1px solid;
 }
 .colapsible *{
     padding: 10px;
@@ -161,7 +178,6 @@ input::-webkit-inner-spin-button {
 .globals select{
     background-color: var(--white);
     font-family: 'Montserrat', Arial, sans-serif;
-    border: var(--dark-green) 1px solid;
     outline: 0;
     padding: 3px;
     border-radius: 3px;
@@ -235,19 +251,19 @@ option:hover{
     display: grid;
     padding: 20px;
     width: 96%;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
+    grid-template-columns:
+     repeat(auto-fit, minmax(250px,1fr));
+    grid-gap: 2rem;
    
 }
 
 
 .item-card{
     background-color: var(--cream);
-    border-radius: 10px;
+    border-radius: 5px;
     color: var(--black);
     padding: 0px 10px;
-    height: 212px;
+    
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -380,13 +396,13 @@ button:hover{
 }
 
 .card-button{
-    width: 320px;
+    
     background-color: var(--light-green);
     color: var(--dark-green);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 134px;
+   
 }
 
 
