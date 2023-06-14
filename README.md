@@ -21,9 +21,9 @@ since 1 gold is actually equivalent to the ammount an average person might need 
 
 ## TO-DO 
 - the user can enter their own currency system 
--- make submit button on the currency form create new economy (with button on sidenav)
--- add error handling to the currency form (no repeat names, no repeat denominations, nothing valued at 0, no divide by 0 ) 
--- replace "fantasy" coin system with a prop that represents a variable coin system 
+  - make submit button on the currency form create new economy (with button on sidenav)
+  - add error handling to the currency form (no repeat names, no repeat denominations, nothing valued at 0, no divide by 0 ) 
+  - replace "fantasy" coin system with a prop that represents a variable coin system 
 
 ## Future Features 
 - items are grouped by category 
