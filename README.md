@@ -1,6 +1,6 @@
 # sages
-SAGES short for System Agnostic Global Economy Simulator endeavors to simulate a fantasy economy with items which can be re-valued in a
-number of different ways, used primarily for world building 
+SAGES (System Agnostic Global Economy Simulator) endeavors to simulate a fantasy economy with items which can be re-valued in a
+number of different ways, used primarily for world building.
 ## Why? 
 Because immersion can increased, of course, by raising the prices when things are scarce or a war is fast approaching, but also because Game Masters make mistakes
 In Dungeons and Dragons, (though, as stated, this tool is system agnostic) a begginer GM (or one who is making up a price for something on the spot) 
