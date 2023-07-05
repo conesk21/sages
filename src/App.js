@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SideNav from "./SideNav.js";
 import Economy from "./economy.js";
-import { itemFactory, items } from "./classes.js";
+import { itemFactory} from "./classes.js";
 import data from "./items.json";
 import CurrencyForm from "./CurrencyForm.js";
 const itemArray = data.map((item)=>{

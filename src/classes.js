@@ -101,68 +101,8 @@ const cheese = itemFactory("cheese",10);
 const items = [bread, ale, cheese]
 
 
-const economyFactory = (itemArray)=>{
-    var globalTransform = 1
 
-    const revalue = (multiplier)=>{
-        globalTransform = globalTransform*multiplier
-        itemArray.forEach(element => {
-            element.revalue(multiplier)
-        });
-    }
 
-    const revert = () => {
-        itemArray.forEach(element => {
-            element.revert()
-        });
-    }
-    const display = ()=>{
-        var result = []
-        for (let i = 0; i<itemArray.length;i++){
-            result.push([itemArray[i].name, itemArray[i].getValue()])
-        }
-        return result
-    }
-    
-    const names = () =>{
-        var result = []
-        for (let i = 0; i<itemArray.length;i++){
-            result.push(itemArray[i].name)
-        }
-        return result
-    }
-
-    const addItem = (name, value) => {
-        var newItem = itemFactory(name, value/globalTransform);
-        newItem.revalue(globalTransform);
-        itemArray.push(newItem);
-    }
-    const changeItemValue = (name, multiplier) =>{
-        var result = itemArray.find(item => {
-            return item.name === name
-          })
-        result.revalue(multiplier);
-    }
-    const getItemValue = (name) =>{
-        var result = itemArray.find(item => {
-            return item.name === name
-          })
-        return result.getValue();
-    }
-
-    const getItem = (name) =>{
-        var result = itemArray.find(item => {
-            return item.name === name
-          })
-        return result;
-    }
-
-    
-    return {revert, revalue, addItem, changeItemValue, getItemValue, names, getItem, display}
-
-}
-
-const smallTown = economyFactory(items,fantasy)
 
  
 

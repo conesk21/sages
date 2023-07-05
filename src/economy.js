@@ -3,6 +3,7 @@ import { itemFactory } from "./classes.js";
 import Revert from "./revert.js";
 import Revalue from "./revalue.js";
 import Card from "./Card.js";
+import { fantasy } from "./classes.js";
 
 class Globals extends Component{
   constructor(props) {
@@ -45,7 +46,7 @@ class Globals extends Component{
             })
           }}>
             {this.state.revalue?trueSpan:falseSpan}</button></div>
-       {this.state.revalue && <Revalue items={this.props.items} onChange={this.onRevalue}/>}
+       {this.state.revalue && <Revalue currency={this.props.currency} items={this.props.items} onChange={this.onRevalue}/>}
        <div className="colapsible"><h4>revert</h4> 
           <button onClick={()=>{
             this.setState({
@@ -116,10 +117,10 @@ class Holder extends Component {
       <div className="card-holder">
         
       {this.state.items.map((items, i) =>{
-        return <Card key={i} name={items.name} val={items.getValue()} edit={false} onSave={this.onSave} onRevert={this.onRevert}/>
+        return <Card currency={this.props.currency} key={i} name={items.name} val={items.getValue()} edit={false} onSave={this.onSave} onRevert={this.onRevert}/>
       })}
 
-      {this.state.temp && <Card key={"temp"} name={""} val={0} edit={true} onSave={this.onSave} onRevert={this.onRevert}/>
+      {this.state.temp && <Card currency={this.props.currency} key={"temp"} name={""} val={0} edit={true} onSave={this.onSave} onRevert={this.onRevert}/>
       }
       
       <button onClick={this.addItem} className="card-button">
@@ -146,8 +147,8 @@ class Economy extends Component{
   render(){
     return (
       <div className="economy">
-        <Globals items={this.state.items} onChange={this.newItemArray}/>
-        <Holder items={this.state.items} onChange={this.newItemArray}/>
+        <Globals items={this.state.items} onChange={this.newItemArray} currency={fantasy}/>
+        <Holder items={this.state.items} onChange={this.newItemArray} currency={fantasy}/>
       </div>
     )
   }

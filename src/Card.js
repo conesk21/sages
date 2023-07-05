@@ -1,13 +1,12 @@
 import React,{Component} from "react";
-import { fantasy } from "./classes.js";
 
 class Slight extends Component{
     constructor(props) {
         super(props);
         this.state = {
             value: props.value,
-            discount: {value: 10, price: fantasy.valueToString( props.value*.9)},
-            markup: {value: 10, price: fantasy.valueToString( props.value*1.1)},
+            discount: {value: 10, price: this.props.currency.valueToString( props.value*.9)},
+            markup: {value: 10, price: this.props.currency.valueToString( props.value*1.1)},
         };
     }
     changeDiscount = (e) =>{
@@ -21,7 +20,7 @@ class Slight extends Component{
 
         this.setState(
             {
-                discount:{value: e.target.value, price: fantasy.valueToString(this.state.value*dis)}
+                discount:{value: e.target.value, price: this.props.currency.valueToString(this.state.value*dis)}
             }
         )
         
@@ -37,7 +36,7 @@ class Slight extends Component{
 
         this.setState(
             {
-                markup:{value: e.target.value, price: fantasy.valueToString(this.state.value*mar)}
+                markup:{value: e.target.value, price: this.props.currency.valueToString(this.state.value*mar)}
             }
         )
         
@@ -89,8 +88,8 @@ class Form extends Component{
     }
 
     onSave=(e)=>{
-        if(fantasy.coinToValue(this.state.coins)>0 & this.state.title !== ""){
-            this.props.onSave(this.state.title, fantasy.coinToValue(this.state.coins))
+        if(this.props.currency.coinToValue(this.state.coins)>0 & this.state.title !== ""){
+            this.props.onSave(this.state.title, this.props.currency.coinToValue(this.state.coins))
     } else {
         alert("An item can't be worthless! It's special in its own way...")
     }
@@ -147,9 +146,9 @@ class Display extends Component{
                 <span className="material-symbols-outlined">more_horiz</span>
                 </button>
             </div> 
-            {this.state.middle && <Slight value={this.props.value}/> }
+            {this.state.middle && <Slight currency={this.props.currency} value={this.props.value}/> }
             <div className="item-price">
-            <span onClick={this.props.changeDisplay}>{fantasy.valueToString(this.props.value)}</span>   
+            <span onClick={this.props.changeDisplay}>{this.props.currency.valueToString(this.props.value)}</span>   
             </div>  
       </div>
     )
@@ -187,7 +186,7 @@ class Card extends Component{
             this.setState({
                 name: title,
                 value: val,
-                price: fantasy.valueToString(val)
+                price: this.props.currency.valueToString(val)
             })
         
         
@@ -199,9 +198,9 @@ class Card extends Component{
     render(){
         var show;
         if (this.state.edit){
-            show = <Form title={this.props.name} coins={fantasy.valueToCoins(this.props.val)} onRevert={this.onRevert} onSave={this.onSave}/>
+            show = <Form title={this.props.name} currency={this.props.currency} coins={this.props.currency.valueToCoins(this.props.val)} onRevert={this.onRevert} onSave={this.onSave}/>
         } else {
-            show = <Display name={this.props.name} value={this.props.val} changeDisplay={this.changeDisplay} /> 
+            show = <Display name={this.props.name} currency={this.props.currency} value={this.props.val} changeDisplay={this.changeDisplay} /> 
         }
     return (
 
