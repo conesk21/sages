@@ -26,10 +26,10 @@ class Globals extends Component{
 
   render(){
     
-    const trueSpan = <span class="material-symbols-outlined">
+    const trueSpan = <span className="material-symbols-outlined">
       expand_less
       </span>;
-    const falseSpan = <span class="material-symbols-outlined">
+    const falseSpan = <span className="material-symbols-outlined">
       expand_more
       </span>;
     

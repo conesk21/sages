@@ -4,26 +4,44 @@ class Conversion extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      primaryName: this.props.primary,
       coin: 1,
       primary: 1
     };
   }
   handleCoinChange=(e)=>{
-    this.setState({
+    
+    if(!(e.target.value==="0")){
+      this.setState({
       coin: e.target.value
     })
     var value = this.state.primary/e.target.value
     this.props.onChange(this.props.coin, value)
-
+    } else {
+      alert("The value of any coin cannot be 0")
+    }
   }
+
   handlePrimaryChange=(e)=>{
+    if(!(e.target.value==="0")){
     this.setState({
       primary: e.target.value
     })
     var value = e.target.value/this.state.coin
     this.props.onChange(this.props.coin, value)
-
+    } else {
+      alert("The value of any coin cannot be 0")
+    }
   }
+  
+  componentDidUpdate(prevProps){
+    if(prevProps.primary !== this.props.primary){
+        this.setState({          
+            primary:1,
+            coin: 1 
+        });
+    }
+}
 
   render(){
       return <div className="conversion">
@@ -40,8 +58,8 @@ class Preveiw extends Component{
     return ( 
     <div className="preview">
       {Object.keys(this.props.object).sort((a,b)=>{
-        return this.props.object[a]-this.props.object[b]}).map((item)=>{
-          return<div classname="coin-preview">{item}: {this.props.object[item]}</div>
+        return this.props.object[a]-this.props.object[b]}).map((item,i)=>{
+          return<div key={i} className="coin-preview">{item}: {this.props.object[item]}</div>
         })}
     </div>
     )
@@ -79,8 +97,8 @@ class Names extends Component{
         <button type="button" className="add-coin" onClick={this.switchTemp}>add coin</button>
         
         <div className="preview">
-        {this.props.names.map((item)=>{
-          return <CoinCard name={item} display={true} save={this.onSave} revert={this.switchTemp} delete={this.props.onRemove}/>
+        {this.props.names.map((item,i)=>{
+          return <CoinCard key={i} name={item} display={true} save={this.onSave} revert={this.switchTemp} delete={this.props.onRemove}/>
         })} 
         {this.state.temp && <CoinCard name={""} display={false} save={this.onSave} revert={this.switchTemp}/>}
         </div>
@@ -133,16 +151,16 @@ class CoinCard extends Component{
     var title = <div>
       <p onClick={this.changeDisplay}>{this.props.name}</p> 
       <button type="button" onClick={()=>{this.props.delete(this.props.name)}}>
-        <span class="material-symbols-outlined">close</span>
+        <span className="material-symbols-outlined">close</span>
         </button>
     </div>
     var input =<div>
       <input type="text" value={this.state.temp} onChange={this.onChange}></input>
       <button type="button"onClick={this.onRevert}>
-      <span class="material-symbols-outlined">undo</span>
+      <span className="material-symbols-outlined">undo</span>
         </button> 
       <button type="button"onClick={this.onSave}>
-        <span class="material-symbols-outlined">done</span>
+        <span className="material-symbols-outlined">done</span>
         </button> 
     </div> 
     return(
@@ -181,18 +199,22 @@ class CurrencyForm extends Component{
       
     }
     changeName=(oldName, newName)=>{
-      if(oldName===""){
-        this.addName(newName)
-      } else{
-        var coins = {...this.state.currency}
-        coins[newName] = coins[oldName]
-        delete coins[oldName]
-        this.setState({
-          currency: coins
-        })
-
-      }
+      if(!(newName in this.state.currency) && !(newName==="")){
+        if(oldName===""){
+          this.addName(newName)
+        } else{
+          var coins = {...this.state.currency}
+          coins[newName] = coins[oldName]
+          delete coins[oldName]
+          this.setState({
+            currency: coins
+          })
+        }
+    } else {
+      alert("The name you attempted to use is not valid")
     }
+  }
+  
 
     deleteName=(name)=>{
       var coin = {...this.state.currency}
@@ -203,8 +225,14 @@ class CurrencyForm extends Component{
     }
 
     onPrimaryChange=(e)=>{
+      var coin = {...this.state.currency}
+      var names = Object.keys(this.state.currency)
+      for(var i=0; i<names.length;i++){
+        coin[names[i]] = 1 
+      }
       this.setState({
-        primary: e.target.value
+        primary: e.target.value,
+        currency: coin
       })
     }
 
@@ -215,6 +243,10 @@ class CurrencyForm extends Component{
         currency: coin
       })
 
+    }
+
+    onSave=(e)=>{
+      e.preventDefault()
     }
     render(){
     
@@ -228,8 +260,8 @@ class CurrencyForm extends Component{
         <div className="conversions">
           <p>how the coins get their value, all based on the primary coin.</p>
           <p className="side-note">*note: coins bigger than the primary should look like this: <span>1 platinum = 10 gold</span> and coins smaller than the primary should look like this: <span>10 silver = 1 gold</span></p>
-        {Object.keys(this.state.currency).filter((item)=> item !== this.state.primary).map((name)=>{
-          return <Conversion coin={name} primary={this.state.primary} onChange={this.updateObject}/>
+        {Object.keys(this.state.currency).filter((item)=> item !== this.state.primary).map((name,i)=>{
+          return <Conversion key={i} coin={name} primary={this.state.primary} onChange={this.updateObject}/>
         })}</div>
         <h4>Preveiw</h4>
         <div className="previews">
@@ -237,7 +269,7 @@ class CurrencyForm extends Component{
         <Preveiw object={this.state.currency} />
         <p>primary: {this.state.primary}</p>
         </div>
-        <button type="submit" className="primary">Save</button>
+        <button onClick={this.onSave} type="submit" className="primary">Save</button>
       </form></div>
       )
   }
