@@ -512,3 +512,6 @@ button:hover{
 .currency-form .primary:hover{
     background-color: var(--cream);
 }
+.currency-form .primary:disabled{
+    background-color: var(--black);
+}

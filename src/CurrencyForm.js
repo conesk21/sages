@@ -54,14 +54,82 @@ class Conversion extends Component{
 }
 
 class Preveiw extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: false,
+      text: "cowboy"
+    };
+  }
+
+  hasError=()=>{
+    console.log("run")
+    var found = false
+    var vals = []
+    for (var i in this.props.object){
+      var target = this.props.object[i]
+      console.log(target)
+      if (target===0 || target===Infinity){
+        found = true 
+        this.setState({
+          error: true, 
+          text: "Currency values cannot be 0"
+        })
+      }
+       if (target<0){
+        found = true 
+        this.setState({
+          error: true, 
+          text: "Currency values cannot be Negative"
+        })
+      }
+      if (target>0 && target<.01){
+        found = true 
+        this.setState({
+          error: true, 
+          text: "Currency values cannot be miniscule"
+        })
+      }
+      console.log(vals)
+      if(vals.indexOf(target)===-1){
+          vals.push(target)
+      } else{
+         found = true 
+          this.setState({
+            error: true, 
+            text: "Currency values must be Unique"
+          })
+      }
+       }
+      if (!found){
+        this.setState({
+          error: false, 
+          text: ""
+        })
+      }
+      this.props.onError(found)
+
+      }
+    
+  
+  componentDidUpdate(prevProps){
+    if(prevProps.object !== this.props.object){
+       this.hasError()
+    }
+  }
   render(){
+    
     return ( 
-    <div className="preview">
+      <div className = "previewGroup">
+        <div className="preview">
       {Object.keys(this.props.object).sort((a,b)=>{
         return this.props.object[a]-this.props.object[b]}).map((item,i)=>{
           return<div key={i} className="coin-preview">{item}: {this.props.object[item]}</div>
         })}
+        </div>
+      {this.state.error &&  <p>WARNING: {this.state.text}</p>}
     </div>
+    
     )
    
   }
@@ -179,7 +247,8 @@ class CurrencyForm extends Component{
     super(props);
     this.state = {
       primary: "",
-      currency: {}
+      currency: {},
+      error: false
     };
   }
     
@@ -244,6 +313,11 @@ class CurrencyForm extends Component{
       })
 
     }
+    changeError=(boolean)=>{
+      this.setState({
+        error: boolean
+      })
+    }
 
     onSave=(e)=>{
       e.preventDefault()
@@ -266,10 +340,10 @@ class CurrencyForm extends Component{
         <h4>Preveiw</h4>
         <div className="previews">
           <p>the names of the coins and their value, in ascending order</p>
-        <Preveiw object={this.state.currency} />
+        <Preveiw object={this.state.currency} onError={this.changeError}/>
         <p>primary: {this.state.primary}</p>
         </div>
-        <button onClick={this.onSave} type="submit" className="primary">Save</button>
+        <button onClick={this.onSave} disabled={this.state.error} type="submit" className="primary">Save</button>
       </form></div>
       )
   }
