@@ -6,7 +6,7 @@ class Revalue extends Component{
       super(props);
       this.state = {
         items: this.props.items,
-        coins: fantasy.valueToCoins(props.items[0].getValue()),
+        coins: this.props.currency.valueToCoins(props.items[0].getValue()),
         index: 0
       };
   }
@@ -16,7 +16,7 @@ class Revalue extends Component{
     var val = this.state.items[newIndex].getValue()
     this.setState(
       {
-        coins: fantasy.valueToCoins(val),
+        coins: this.props.currency.valueToCoins(val),
         index: newIndex
       }
     )
@@ -38,7 +38,7 @@ class Revalue extends Component{
   onSave = (e)=>{
     e.preventDefault()
     var oldVal = this.state.items[this.state.index].getValue()
-    var newVal = fantasy.coinToValue(this.state.coins);
+    var newVal = this.props.currency.coinToValue(this.state.coins);
     var reval = newVal/oldVal
     if (newVal=== 0){
       alert("You can't revalue an item to zero, because it will revalue everything to zero!")

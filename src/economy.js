@@ -3,7 +3,7 @@ import { itemFactory } from "./classes.js";
 import Revert from "./revert.js";
 import Revalue from "./revalue.js";
 import Card from "./Card.js";
-import { fantasy } from "./classes.js";
+
 
 class Globals extends Component{
   constructor(props) {
@@ -135,7 +135,8 @@ class Economy extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      items: props.items
+      items: props.items,
+      currency: props.currency
     };
 }
   newItemArray = (array)=>{
@@ -147,8 +148,8 @@ class Economy extends Component{
   render(){
     return (
       <div className="economy">
-        <Globals items={this.state.items} onChange={this.newItemArray} currency={fantasy}/>
-        <Holder items={this.state.items} onChange={this.newItemArray} currency={fantasy}/>
+        <Globals items={this.state.items} onChange={this.newItemArray} currency={this.props.currency}/>
+        <Holder items={this.state.items} onChange={this.newItemArray} currency={this.props.currency}/>
       </div>
     )
   }

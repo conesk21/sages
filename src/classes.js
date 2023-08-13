@@ -106,6 +106,6 @@ const items = [bread, ale, cheese]
 
  
 
-export {items, itemFactory, fantasy}
+export { coinFactory, currencyFacory, items, itemFactory, fantasy}
 
 

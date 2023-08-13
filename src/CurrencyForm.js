@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {coinFactory, currencyFacory} from "./classes";
 
 class Conversion extends Component{
   constructor(props) {
@@ -63,12 +64,12 @@ class Preveiw extends Component{
   }
 
   hasError=()=>{
-    console.log("run")
+    
     var found = false
     var vals = []
     for (var i in this.props.object){
       var target = this.props.object[i]
-      console.log(target)
+      
       if (target===0 || target===Infinity){
         found = true 
         this.setState({
@@ -90,7 +91,7 @@ class Preveiw extends Component{
           text: "Currency values cannot be miniscule"
         })
       }
-      console.log(vals)
+      
       if(vals.indexOf(target)===-1){
           vals.push(target)
       } else{
@@ -355,6 +356,12 @@ class CurrencyForm extends Component{
 
     onSave=(e)=>{
       e.preventDefault()
+      var coinArray = Object.keys(this.state.currency).sort((a,b)=>{
+        return this.state.currency[a]-this.state.currency[b]}).map((item,i)=>{
+          return coinFactory(item, this.state.currency[item])})
+      console.log(coinArray)
+      var newCurrency = currencyFacory(coinArray)
+      this.props.onSave("New Economy", newCurrency)
     }
     render(){
     

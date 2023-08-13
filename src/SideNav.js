@@ -5,8 +5,8 @@ class SideNav extends Component {
       return (
         <div className="sidenav">
           <h1>SAGES</h1>
-          <button onClick={()=>{this.props.onChange(true)}}><h4>View Economy</h4></button>
-          <button onClick={()=>{this.props.onChange(false)}}><h4>Add Currency</h4></button>
+          {this.props.names.map((name,i)=><button key={name+i} onClick={()=>{this.props.onChange(name)}}><h4>{name} Economy</h4></button>)}
+          <button onClick={()=>{this.props.onChange("edit")}}><h4>Add Economy</h4></button>
         </div>
     )}
   }
