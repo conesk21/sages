@@ -136,23 +136,18 @@ class Preveiw extends Component{
 }
 
 class Names extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      temp: false
-    };
-  }
-  switchTemp=()=>{
-    this.setState({
-      temp: !this.state.temp
-    })
-  }
+    
 
   onSave=(oldName, newName)=>{
-    this.props.onSave(oldName,newName)
-    this.setState({
-      temp:false
-    })
+    if(newName ===""){
+      alert("Coins mut have a name")
+    } else if(this.props.names.indexOf(newName) !== -1){
+      alert("All names must be unique!")
+    } else if (/\d/.test(newName)){
+      alert("Names can't contain numbers, silly")
+    } else {
+      this.props.onSave(oldName,newName)
+    }
 
   }
   
@@ -161,14 +156,12 @@ class Names extends Component{
   render(){
     return(
       <div className="denominations">
-        <p>input the names of each coin (order doesn't matter)</p>
-        <button type="button" className="add-coin" onClick={this.switchTemp}>add coin</button>
-        
+      
+        <NameInput save={this.onSave} />
         <div className="preview">
         {this.props.names.map((item,i)=>{
-          return <CoinCard key={i} name={item} display={true} save={this.onSave} revert={this.switchTemp} delete={this.props.onRemove}/>
+          return <CoinCard key={i} name={item} save={this.onSave} delete={this.props.onRemove}/>
         })} 
-        {this.state.temp && <CoinCard name={""} display={false} save={this.onSave} revert={this.switchTemp}/>}
         </div>
         <p>primary coin:</p>
         <select onChange={this.props.onPrimaryChange}>
@@ -180,12 +173,47 @@ class Names extends Component{
   }
 }
 
+class NameInput extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      temp: "",
+    };
+  }
+
+  onChange=(e)=>{
+    this.setState({
+      temp: e.target.value
+    })
+  }
+  
+
+  onSave=()=>{
+    
+    this.props.save("", this.state.temp)
+    this.setState({
+      temp: ""
+    })
+  }
+  
+
+  render(){
+    return(
+      <div> 
+      <input type="text" value={this.state.temp} onChange={this.onChange}></input>
+      <button type="button" className="add-coin" onClick={this.onSave}>add coin</button>
+      </div>
+    )
+  }
+
+}
+
 class CoinCard extends Component{
   constructor(props) {
     super(props);
     this.state = {
       temp: this.props.name,
-      display: this.props.display
+      display: true
     };
   }
 
@@ -201,7 +229,6 @@ class CoinCard extends Component{
   }
 
   onRevert=()=>{
-    this.props.revert()
     this.setState({
       temp: this.props.name, 
       display: true
@@ -211,8 +238,17 @@ class CoinCard extends Component{
     this.setState({
       display: true
     })
-    this.props.save(this.props.name, this.state.temp)}
-  
+    this.props.save(this.props.name, this.state.temp)
+  }
+
+    componentDidUpdate(prevProps){
+      if(prevProps.name !== this.props.name){
+          this.setState({          
+              temp: this.props.name,
+              display:true 
+          });
+      }
+  }
 
   render(){
 
@@ -248,7 +284,7 @@ class CurrencyForm extends Component{
     this.state = {
       primary: "",
       currency: {},
-      error: false
+      error: true
     };
   }
     
@@ -268,7 +304,7 @@ class CurrencyForm extends Component{
       
     }
     changeName=(oldName, newName)=>{
-      if(!(newName in this.state.currency) && !(newName==="")){
+      
         if(oldName===""){
           this.addName(newName)
         } else{
@@ -279,9 +315,7 @@ class CurrencyForm extends Component{
             currency: coins
           })
         }
-    } else {
-      alert("The name you attempted to use is not valid")
-    }
+   
   }
   
 
