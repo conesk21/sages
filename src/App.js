@@ -7,7 +7,7 @@ import data from "./items.json";
 import CurrencyForm from "./CurrencyForm.js";
 
 const itemArray = data.map((item)=>{
-  return itemFactory(item[0],item[1])
+  return itemFactory(item.name,item.cost)
 })
 const baseEconomy = {name:"Unremembered Kingdoms", items: itemArray, currency: fantasy}
 class App extends Component {
